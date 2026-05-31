@@ -31,7 +31,7 @@ export default function Footer() {
         >
           Built with
           <Heart size={11} style={{ color: "#fb7185" }} />
-          using React + TypeScript + Three.js
+          using React + Three.js
         </p>
 
         <p

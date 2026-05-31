@@ -90,8 +90,8 @@ export default function Navbar({ isDark, toggleTheme }) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "py-4 glass-card border-b border-opacity-50"
-          : "py-6 bg-transparent border-transparent"
+          ? "py-3 md:py-4 glass-card border-b border-opacity-50"
+          : "py-4 md:py-6 bg-transparent border-transparent"
       }`}
       style={{
         borderBottomColor: scrolled ? "var(--color-border)" : "transparent",
