@@ -1,16 +1,95 @@
-# React + Vite
+# 🚀 Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive portfolio website built with React and Vite to showcase my projects, technical skills, experience, and achievements as a Frontend Engineer.
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Responsive design for all devices
+* Smooth animations and transitions
+* Project showcase section
+* Skills and technology stack overview
+* Professional experience timeline
+* Contact section with social links
+* Fast performance powered by Vite
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React.js
+* JavaScript (ES6+)
+* Vite
+* Tailwind CSS
+* Framer Motion
+* HTML5
+* CSS3
 
-## Expanding the ESLint configuration
+## 📂 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+src/
+├── components/
+├── sections/
+├── assets/
+├── hooks/
+├── App.jsx
+└── main.jsx
+```
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/portfolio.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## 🔗 Live Demo
+
+Add your deployed portfolio URL here:
+
+```bash
+https://your-portfolio-url.com
+```
+
+## 👨‍💻 About Me
+
+I'm Subham Saha, a Frontend Engineer with 3+ years of experience building scalable and user-centric web applications using React.js and modern frontend technologies.
+
+## 📫 Contact
+
+* LinkedIn: Add your LinkedIn profile
+* GitHub: Add your GitHub profile
+* Email: Add your email address
+
+---
+
+⭐ If you like this project, consider giving it a star on GitHub.
