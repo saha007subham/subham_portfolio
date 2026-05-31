@@ -129,7 +129,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <motion.div variants={container} initial="hidden" animate="show">
-          <motion.div variants={item} className="mb-6">
+          {/* <motion.div variants={item} className="mb-6">
             <span
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono-custom tracking-widest glass-card"
               style={{
@@ -146,7 +146,7 @@ export default function Hero() {
               />
               Available for opportunities
             </span>
-          </motion.div>
+          </motion.div> */}
 
           <motion.h1
             variants={item}
