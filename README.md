@@ -74,7 +74,7 @@ npm run preview
 
 ## 🔗 Live Demo
 
-Add your deployed portfolio URL here:
+https://subham-portfolio-one.vercel.app/
 
 ```bash
 https://your-portfolio-url.com
