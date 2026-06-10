@@ -104,7 +104,7 @@ function SceneContent() {
 
       <pointLight position={[0, 5, -5]} intensity={1} color="#a78bfa" />
 
-      <FloatingSphere position={[-3, 1.5, -1]} color="#38bdf8" speed={1.5} />
+      {/* <FloatingSphere position={[-7, 2, -2]} color="#38bdf8" speed={1.5} /> */}
 
       <FloatingSphere position={[3.5, -1, -2]} color="#22d3ee" speed={1.2} />
 
