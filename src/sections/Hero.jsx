@@ -18,7 +18,6 @@ class ErrorBoundaryHero extends Component {
     return this.props.children;
   }
 }
-
 const typewriterWords = [
   "React Applications",
   "TypeScript Systems",
@@ -36,14 +35,11 @@ export default function Hero() {
   useEffect(() => {
     const type = () => {
       const word = typewriterWords[wordIndex.current];
-
       if (!wordRef.current) return;
 
       if (!deleting.current) {
         wordRef.current.textContent = word.slice(0, charIndex.current + 1);
-
         charIndex.current++;
-
         if (charIndex.current === word.length) {
           deleting.current = true;
           timerRef.current = setTimeout(type, 2000);
@@ -51,9 +47,7 @@ export default function Hero() {
         }
       } else {
         wordRef.current.textContent = word.slice(0, charIndex.current - 1);
-
         charIndex.current--;
-
         if (charIndex.current === 0) {
           deleting.current = false;
           wordIndex.current = (wordIndex.current + 1) % typewriterWords.length;
@@ -64,50 +58,37 @@ export default function Hero() {
     };
 
     timerRef.current = setTimeout(type, 800);
-
     return () => clearTimeout(timerRef.current);
   }, []);
 
   const scrollTo = (href) => {
     const el = document.querySelector(href);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.12, delayChildren: 0.3 },
     },
   };
 
   const item = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
+    hidden: { opacity: 0, y: 40 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] },
     },
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 md:py-0"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Glow */}
+      {/* Radial glow bg */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -129,7 +110,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <motion.div variants={container} initial="hidden" animate="show">
-          {/* <motion.div variants={item} className="mb-6">
+          <motion.div variants={item} className="mb-6">
             <span
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono-custom tracking-widest glass-card"
               style={{
@@ -139,20 +120,17 @@ export default function Hero() {
             >
               <span
                 className="w-2 h-2 rounded-full animate-glow-pulse"
-                style={{
-                  background: "#38bdf8",
-                  boxShadow: "0 0 8px #38bdf8",
-                }}
+                style={{ background: "#38bdf8", boxShadow: "0 0 8px #38bdf8" }}
               />
               Available for opportunities
             </span>
-          </motion.div> */}
+          </motion.div>
 
           <motion.h1
             variants={item}
             className="font-space font-bold leading-none mb-4"
             style={{
-              fontSize: "clamp(2.5rem, 8vw, 7rem)",
+              fontSize: "clamp(3.5rem, 9vw, 7rem)",
               letterSpacing: "-0.03em",
             }}
           >
@@ -180,10 +158,7 @@ export default function Hero() {
           <motion.p
             variants={item}
             className="max-w-2xl mx-auto text-base md:text-lg leading-relaxed mb-12"
-            style={{
-              color: "var(--color-muted)",
-              lineHeight: "1.7",
-            }}
+            style={{ color: "var(--color-muted)", lineHeight: "1.7" }}
           >
             3+ years building scalable React applications used by thousands of
             users worldwide. Specializing in TypeScript, performance
@@ -208,6 +183,7 @@ export default function Hero() {
                 fontFamily: "Space Grotesk",
                 boxShadow: "0 0 20px rgba(56,189,248,0.3)",
               }}
+              data-cursor-hover
             >
               <ExternalLink size={16} />
               View Projects
@@ -225,6 +201,7 @@ export default function Hero() {
                 border: "1px solid rgba(56,189,248,0.25)",
                 fontFamily: "Space Grotesk",
               }}
+              data-cursor-hover
             >
               <Download size={16} />
               Resume
@@ -240,35 +217,27 @@ export default function Hero() {
                 border: "1px solid rgba(56,189,248,0.2)",
                 fontFamily: "Space Grotesk",
               }}
+              data-cursor-hover
             >
               <Mail size={16} />
               Contact Me
             </motion.button>
           </motion.div>
 
+          {/* Stats */}
           <motion.div
             variants={item}
             className="flex flex-wrap items-center justify-center gap-10 mt-16"
           >
             {[
-              {
-                value: "3+",
-                label: "Years Experience",
-              },
-              {
-                value: "2K+",
-                label: "Followers",
-              },
-              {
-                value: "20+",
-                label: "Projects Built",
-              },
+              { value: "3+", label: "Years Experience" },
+              { value: "2K+", label: "Followers" },
+              { value: "20+", label: "Projects Built" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-space font-bold text-3xl gradient-text">
                   {stat.value}
                 </div>
-
                 <div
                   className="text-xs mt-1"
                   style={{
@@ -284,33 +253,22 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.button
         onClick={() => scrollTo("#about")}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 1.6,
-          duration: 0.6,
-        }}
+        transition={{ delay: 1.6, duration: 0.6 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{
-          color: "var(--color-muted)",
-        }}
+        style={{ color: "var(--color-muted)" }}
+        data-cursor-hover
       >
+        {/* <span className="text-xs font-mono-custom tracking-widest" style={{ letterSpacing: '0.2em' }}>SCROLL</span> */}
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown
-            size={16}
-            style={{
-              color: "var(--color-primary)",
-            }}
-          />
+          <ArrowDown size={16} style={{ color: "var(--color-primary)" }} />
         </motion.div>
       </motion.button>
     </section>
