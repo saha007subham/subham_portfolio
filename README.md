@@ -74,10 +74,9 @@ npm run preview
 
 ## 🔗 Live Demo
 
-https://subham-portfolio-one.vercel.app/
 
 ```bash
-https://your-portfolio-url.com
+https://subham-portfolio-one.vercel.app/
 ```
 
 ## 👨‍💻 About Me
