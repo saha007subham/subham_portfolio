@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Layers, Compass, Code, Brain } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { ExternalLink, Layers, Zap, Moon, Smartphone } from "lucide-react";
 
-const Github = (props) => (
+const Github = ({ size = 24, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -18,230 +20,281 @@ const Github = (props) => (
   </svg>
 );
 
-export default function Projects() {
-  const [filter, setFilter] = useState("All");
+const projects = [
+  {
+    name: "SnapUI",
+    tagline: "Modern React Component Platform",
+    description:
+      "A developer-focused UI platform featuring copy-paste React components. Built for modern developers who need production-ready, accessible components with zero friction.",
+    tech: ["React.js", "Tailwind CSS", "Vite", "React Router"],
+    features: [
+      { icon: Layers, label: "Copy-paste Components" },
+      { icon: Moon, label: "Dark Mode" },
+      { icon: Smartphone, label: "Responsive Layouts" },
+      { icon: Zap, label: "Smooth Transitions" },
+    ],
+    gradient: "linear-gradient(135deg, #0ea5e9, #38bdf8, #22d3ee)",
+    glow: "rgba(56,189,248,0.25)",
+    borderColor: "rgba(56,189,248,0.2)",
+    github: "https://github.com/saha007subham/snap-ui",
+    demo: "https://snap-ui-two.vercel.app/",
+    image:
+      "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800",
+    badge: "Featured",
+  },
+];
 
-  const categories = ["All", "React", "Three.js", "AI & Systems"];
+function ProjectCard({ project, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [hovering, setHovering] = useState(false);
 
-  const projects = [
-    {
-      title: "Aetherial Canvas",
-      category: "Three.js",
-      desc: "Interactive 3D particle design workspace built using React Three Fiber, allowing real-time physics editing and shader compilations.",
-      icon: Compass,
-      tags: ["React Three Fiber", "Three.js", "Shaders", "Zustand"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-    {
-      title: "Omni Mind Dashboard",
-      category: "AI & Systems",
-      desc: "Sleek glassmorphic analytics suite with integrated LLM streaming responses, interactive pipeline graphs, and database telemetry.",
-      icon: Brain,
-      tags: ["Next.js", "OpenAI API", "Recharts", "Prisma"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-    {
-      title: "Synapse Code Suite",
-      category: "React",
-      desc: "Next-gen collaborative markdown and code editor, powered by WebRTC sync, active compilation trees, and custom workspace themes.",
-      icon: Code,
-      tags: ["React 19", "WebRTC", "Monaco Editor", "Tailwind CSS"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-    {
-      title: "Helix Component Library",
-      category: "React",
-      desc: "Stunning, production-ready component catalog utilizing Framer Motion, strict accessibility patterns, and robust CSS variable systems.",
-      icon: Layers,
-      tags: ["React", "Framer Motion", "CSS Variables", "Storybook"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-    {
-      title: "Lumen Raycaster",
-      category: "Three.js",
-      desc: "Experimental light raycasting and environment simulator inside WebGL canvas, testing custom shader glass reflection metrics.",
-      icon: Compass,
-      tags: ["Three.js", "WebGL", "GLSL Shaders", "Vite"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-    {
-      title: "Titan Telemetry",
-      category: "AI & Systems",
-      desc: "High-performance systems monitor utilizing micro-frontends, telemetry streams, and lightweight WebAssembly data parsers.",
-      icon: Brain,
-      tags: ["React", "Rust/Wasm", "WebSockets", "Tailwind CSS"],
-      demo: "https://react.dev",
-      github: "https://github.com",
-    },
-  ];
-
-  const filteredProjects =
-    filter === "All"
-      ? projects
-      : projects.filter((p) => p.category === filter);
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
+    const y = -((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    setTilt({ x, y });
+  };
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
-      {/* Background ambient highlights */}
-      <div
-        className="absolute right-0 bottom-10 w-[500px] h-[500px] rounded-full pointer-events-none filter blur-[150px] opacity-10"
-        style={{
-          background: "radial-gradient(circle, var(--color-primary), transparent 70%)",
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.9,
+        ease: [0.23, 1, 0.32, 1],
+        delay: index * 0.15,
+      }}
+    >
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => {
+          setTilt({ x: 0, y: 0 });
+          setHovering(false);
         }}
-      />
-      <div
-        className="absolute left-0 top-10 w-[450px] h-[450px] rounded-full pointer-events-none filter blur-[130px] opacity-5"
-        style={{
-          background: "radial-gradient(circle, var(--color-secondary), transparent 70%)",
+        animate={{
+          rotateX: tilt.x,
+          rotateY: tilt.y,
+          scale: hovering ? 1.01 : 1,
         }}
-      />
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        className="rounded-3xl overflow-hidden glass-card"
+        style={{
+          border: `1px solid ${project.borderColor}`,
+          boxShadow: hovering
+            ? `0 20px 80px ${project.glow}, 0 0 0 1px ${project.borderColor}`
+            : `0 4px 30px rgba(0,0,0,0.3)`,
+          transformStyle: "preserve-3d",
+          perspective: "1000px",
+          transition: "box-shadow 0.4s ease",
+        }}
+        data-cursor-hover
+      >
+        {/* Image section */}
+        <div className="relative h-64 md:h-80 overflow-hidden">
+          <motion.img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover"
+            animate={{ scale: hovering ? 1.05 : 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 30%, rgba(2,4,8,0.9) 100%)",
+            }}
+          />
 
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16 space-y-4">
-          <span className="text-xs font-mono-custom tracking-[0.2em] uppercase text-[var(--color-primary)] font-semibold">
-            My Works
-          </span>
-          <h2 className="text-4xl md:text-5xl font-space font-bold">
-            Featured <span className="gradient-text glow-text">Projects</span>
-          </h2>
-          
-          {/* Category Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-6">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className="px-5 py-2.5 rounded-full text-xs md:text-sm font-space font-semibold transition-all duration-300 relative overflow-hidden cursor-pointer"
-                style={{
-                  background:
-                    filter === cat
-                      ? "transparent"
-                      : "rgba(255,255,255,0.03)",
-                  border: `1px solid ${
-                    filter === cat
-                      ? "rgba(56,189,248,0.3)"
-                      : "rgba(255,255,255,0.05)"
-                  }`,
-                  color: filter === cat ? "var(--color-primary)" : "var(--color-muted)",
-                }}
-              >
-                {cat}
-                {filter === cat && (
-                  <motion.span
-                    layoutId="activeFilterTab"
-                    className="absolute inset-0 z-[-1] rounded-full"
-                    style={{
-                      background: "rgba(56, 189, 248, 0.08)",
-                    }}
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                  />
-                )}
-              </button>
-            ))}
+          {/* Badge */}
+          <div className="absolute top-4 left-4">
+            <span
+              className="px-3 py-1.5 rounded-full text-xs font-mono-custom tracking-wider"
+              style={{
+                background: project.gradient,
+                color: "#020408",
+                fontWeight: 600,
+              }}
+            >
+              {project.badge}
+            </span>
           </div>
+
+          {/* Buttons overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: hovering ? 1 : 0, y: hovering ? 0 : 10 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-4 right-4 flex gap-2"
+          >
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 flex items-center justify-center rounded-xl glass-card"
+              style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+            >
+              <Github size={16} style={{ color: "var(--color-text)" }} />
+            </a>
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 flex items-center justify-center rounded-xl"
+              style={{ background: project.gradient }}
+            >
+              <ExternalLink size={16} style={{ color: "#020408" }} />
+            </a>
+          </motion.div>
         </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((proj) => {
-              const Icon = proj.icon;
-              return (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{ y: -8 }}
-                  key={proj.title}
-                  className="p-8 rounded-[2rem] glass-card flex flex-col justify-between border-opacity-25 hover:border-opacity-65 group relative overflow-hidden"
+        {/* Content */}
+        <div className="p-8">
+          <div className="mb-4">
+            <h3
+              className="font-space font-bold text-2xl mb-1"
+              style={{ color: "var(--color-text)" }}
+            >
+              {project.name}
+            </h3>
+            <p
+              className="text-sm font-mono-custom"
+              style={{ color: "var(--color-primary)" }}
+            >
+              {project.tagline}
+            </p>
+          </div>
+
+          <p
+            className="text-sm leading-relaxed mb-6"
+            style={{ color: "var(--color-muted)", lineHeight: "1.7" }}
+          >
+            {project.description}
+          </p>
+
+          {/* Features */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {project.features.map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-2.5 p-3 rounded-xl"
+                style={{
+                  background: "rgba(56,189,248,0.04)",
+                  border: "1px solid rgba(56,189,248,0.08)",
+                }}
+              >
+                <Icon
+                  size={14}
+                  style={{ color: "var(--color-primary)", flexShrink: 0 }}
+                />
+                <span
+                  className="text-xs"
+                  style={{ color: "var(--color-muted)" }}
                 >
-                  <div>
-                    {/* Top row */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div
-                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-[var(--color-primary)]"
-                        style={{
-                          background: "rgba(56,189,248,0.08)",
-                          border: "1px solid rgba(56,189,248,0.15)",
-                        }}
-                      >
-                        <Icon size={20} />
-                      </div>
-                      <span
-                        className="text-[10px] font-mono-custom uppercase tracking-wider px-2.5 py-1 rounded-md"
-                        style={{
-                          background: "rgba(255,255,255,0.04)",
-                          border: "1px solid rgba(255,255,255,0.06)",
-                          color: "var(--color-muted)",
-                        }}
-                      >
-                        {proj.category}
-                      </span>
-                    </div>
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-                    {/* Meta info */}
-                    <h3 className="text-xl font-space font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
-                      {proj.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-[var(--color-muted)] mb-6">
-                      {proj.desc}
-                    </p>
-                  </div>
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="px-3 py-1 rounded-full text-xs font-mono-custom"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  color: "var(--color-muted)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
 
-                  <div>
-                    {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {proj.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] px-2 py-1 rounded font-mono-custom text-[var(--color-muted)]"
-                          style={{
-                            background: "rgba(255,255,255,0.03)",
-                            border: "1px solid rgba(255,255,255,0.05)",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+          {/* CTA buttons */}
+          <div className="flex gap-3">
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold glass-card"
+              style={{
+                color: "var(--color-text)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+              data-cursor-hover
+            >
+              <Github size={15} /> GitHub
+            </motion.a>
+            <motion.a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{
+                scale: 1.04,
+                boxShadow: `0 0 30px ${project.glow}`,
+              }}
+              whileTap={{ scale: 0.97 }}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold"
+              style={{ background: project.gradient, color: "#020408" }}
+              data-cursor-hover
+            >
+              <ExternalLink size={15} /> Live Demo
+            </motion.a>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
-                    {/* Action Links */}
-                    <div className="flex items-center gap-3 border-t border-opacity-5 pt-5" style={{ borderColor: "var(--color-muted)" }}>
-                      <a
-                        href={proj.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs font-space font-bold text-[var(--color-primary)] hover:underline"
-                      >
-                        <ExternalLink size={13} />
-                        Live Demo
-                      </a>
-                      <a
-                        href={proj.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs font-space font-bold text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors duration-300"
-                      >
-                        <Github size={13} />
-                        GitHub
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+export default function Projects() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section id="projects" className="section-padding" ref={ref}>
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <p className="section-label mb-4">03 — Projects</p>
+          <h2
+            className="font-space font-bold mb-4"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+              letterSpacing: "-0.03em",
+              color: "var(--color-text)",
+            }}
+          >
+            Things I've <span className="gradient-text">Built</span>
+          </h2>
+          <p
+            className="max-w-xl mx-auto text-base"
+            style={{ color: "var(--color-muted)", lineHeight: "1.7" }}
+          >
+            Side projects and open-source work that showcase my approach to
+            building premium experiences.
+          </p>
         </motion.div>
+
+        <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.name} project={project} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
