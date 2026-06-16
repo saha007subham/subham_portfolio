@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import snapUiImage from "../assets/snap-ui.png";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Layers, Zap, Moon, Smartphone } from "lucide-react";
 
@@ -38,8 +39,7 @@ const projects = [
     borderColor: "rgba(56,189,248,0.2)",
     github: "https://github.com/saha007subham/snap-ui",
     demo: "https://snap-ui-two.vercel.app/",
-    image:
-      "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: snapUiImage,
     badge: "Featured",
   },
 ];
