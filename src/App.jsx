@@ -9,9 +9,12 @@ import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
 import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
+import Certification from "./sections/Certification";
 
 function App() {
-  const [isDark, setIsDark] = useState(() => !document.body.classList.contains("light-mode"));
+  const [isDark, setIsDark] = useState(
+    () => !document.body.classList.contains("light-mode"),
+  );
 
   const toggleTheme = () => {
     const nextDark = !isDark;
@@ -41,6 +44,7 @@ function App() {
         <Experience />
         <Projects />
         <Skills />
+        <Certification />
         <Contact />
       </main>
 
