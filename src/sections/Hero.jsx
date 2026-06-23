@@ -161,7 +161,7 @@ export default function Hero() {
             style={{ color: "var(--color-muted)", lineHeight: "1.7" }}
           >
             3+ years building scalable React applications used by thousands of
-            users worldwide. Specializing in TypeScript, performance
+            users worldwide. Specializing in JavaScript, performance
             optimization, and AI-powered web experiences.
           </motion.p>
 
@@ -232,7 +232,7 @@ export default function Hero() {
             {[
               { value: "3+", label: "Years Experience" },
               { value: "2K+", label: "Followers" },
-              { value: "20+", label: "Projects Built" },
+              { value: "200+", label: "DSA Problems Solved" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-space font-bold text-3xl gradient-text">
