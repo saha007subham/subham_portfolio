@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import ScrollProgress from "./components/ScrollProgress";
 import ParticleBackground from "./components/ParticleBackground";
@@ -10,8 +11,10 @@ import Skills from "./sections/Skills";
 import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
 import Certification from "./sections/Certification";
+import Preloader from "./components/Preloader";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isDark, setIsDark] = useState(
     () => !document.body.classList.contains("light-mode"),
   );
@@ -27,30 +30,36 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen transition-colors duration-500 bg-[var(--color-bg-primary)] text-[var(--color-text)]">
-      {/* Scroll indicator bar */}
-      <ScrollProgress />
+    <>
+      <AnimatePresence>
+        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
 
-      {/* Dynamic interactive particle background */}
-      <ParticleBackground />
+      <div className="relative min-h-screen transition-colors duration-500 bg-[var(--color-bg-primary)] text-[var(--color-text)]">
+        {/* Scroll indicator bar */}
+        <ScrollProgress />
 
-      {/* Primary header navbar */}
-      <Navbar isDark={isDark} toggleTheme={toggleTheme} />
+        {/* Dynamic interactive particle background */}
+        <ParticleBackground />
 
-      {/* Main structured portfolio sections */}
-      <main className="relative z-10">
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Certification />
-        <Contact />
-      </main>
+        {/* Primary header navbar */}
+        <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
-      {/* Footer segment */}
-      <Footer />
-    </div>
+        {/* Main structured portfolio sections */}
+        <main className="relative z-10">
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+          <Certification />
+          <Contact />
+        </main>
+
+        {/* Footer segment */}
+        <Footer />
+      </div>
+    </>
   );
 }
 
