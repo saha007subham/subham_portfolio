@@ -127,16 +127,35 @@ export default function Contact() {
 
     setIsSubmitting(true);
 
-    // Simulate sending message
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus("success");
-      setForm({ name: "", email: "", message: "" });
-      setTouched({});
-
-      // Auto-clear success message
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }, 1500);
+    fetch("https://formsubmit.co/ajax/dev.subham07@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        Name: form.name,
+        Email: form.email,
+        Message: form.message,
+        _subject: `New Portfolio Message from ${form.name}`
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          setSubmitStatus("success");
+          setForm({ name: "", email: "", message: "" });
+        } else {
+          setSubmitStatus("error");
+        }
+        setTouched({});
+        setIsSubmitting(false);
+        setTimeout(() => setSubmitStatus(null), 5000);
+      })
+      .catch(() => {
+        setSubmitStatus("error");
+        setIsSubmitting(false);
+        setTimeout(() => setSubmitStatus(null), 5000);
+      });
   };
 
   const socials = [
@@ -419,6 +438,17 @@ export default function Contact() {
                   >
                     <CheckCircle2 size={16} />
                     Message Sent Successfully! I'll get back to you shortly.
+                  </motion.div>
+                )}
+                {submitStatus === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-space font-semibold flex items-center gap-2.5"
+                  >
+                    <AlertCircle size={16} />
+                    Failed to send message. Please try again later or email directly.
                   </motion.div>
                 )}
               </AnimatePresence>
