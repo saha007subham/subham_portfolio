@@ -3,8 +3,8 @@ import { motion, useInView, useAnimation } from "framer-motion";
 
 const skills = [
   { name: "ReactJS", level: 95, color: "#61dafb" },
-  { name: "TypeScript", level: 90, color: "#3178c6" },
   { name: "JavaScript", level: 92, color: "#f7df1e" },
+  { name: "TypeScript", level: 80, color: "#3178c6" },
   { name: "Redux Toolkit", level: 88, color: "#764abc" },
   { name: "Tailwind CSS", level: 93, color: "#38bdf8" },
   { name: "GraphQL", level: 80, color: "#e535ab" },
