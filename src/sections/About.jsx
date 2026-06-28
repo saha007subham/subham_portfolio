@@ -54,7 +54,10 @@ export default function About() {
         >
           {/* Header */}
           <div>
-            <motion.p variants={item} className="section-label mb-4">
+            <motion.p
+              variants={item}
+              className="section-label mb-4 text-center"
+            >
               01 — About Me
             </motion.p>
             <motion.h2
