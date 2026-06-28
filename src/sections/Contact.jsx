@@ -96,10 +96,9 @@ export default function Contact() {
   };
 
   const handleBlur = (e) => {
-    const { name, value } = e.target;
-    setTouched((prev) => ({ ...prev, [name]: true }));
-    const error = validateField(name, value);
-    setErrors((prev) => ({ ...prev, [name]: error }));
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: false }));
+    setErrors((prev) => ({ ...prev, [name]: null }));
   };
 
   const handleChange = (e) => {
@@ -276,11 +275,11 @@ export default function Contact() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="John Doe"
-                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-black bg-opacity-25 dark:bg-white dark:bg-opacity-5 border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.name && errors.name
+                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-[var(--color-input-bg)] border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.name && errors.name
                       ? "border-red-500/50"
                       : touched.name && !errors.name
                         ? "border-green-500/50"
-                        : "border-white/10 dark:border-white/10"
+                        : "border-[var(--color-input-border)]"
                       }`}
                   />
                   {touched.name && (
@@ -317,11 +316,11 @@ export default function Contact() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="john@example.com"
-                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-black bg-opacity-25 dark:bg-white dark:bg-opacity-5 border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.email && errors.email
+                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-[var(--color-input-bg)] border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.email && errors.email
                       ? "border-red-500/50"
                       : touched.email && !errors.email
                         ? "border-green-500/50"
-                        : "border-white/10 dark:border-white/10"
+                        : "border-[var(--color-input-border)]"
                       }`}
                   />
                   {touched.email && (
@@ -358,11 +357,11 @@ export default function Contact() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Let's build something exceptional..."
-                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-black bg-opacity-25 dark:bg-white dark:bg-opacity-5 border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.message && errors.message
+                    className={`w-full px-5 py-4 rounded-xl font-space font-semibold text-sm bg-[var(--color-input-bg)] border transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] ${touched.message && errors.message
                       ? "border-red-500/50"
                       : touched.message && !errors.message
                         ? "border-green-500/50"
-                        : "border-white/10 dark:border-white/10"
+                        : "border-[var(--color-input-border)]"
                       }`}
                   />
                   {touched.message && (

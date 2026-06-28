@@ -12,6 +12,8 @@
   --color-accent: #22d3ee;
   --color-glow: rgba(56, 189, 248, 0.3);
   --color-glow-sm: rgba(56, 189, 248, 0.15);
+  --color-input-bg: rgba(0, 0, 0, 0.25);
+  --color-input-border: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -48,6 +50,8 @@ body.light-mode {
   --color-accent: #0891b2;
   --color-glow: rgba(2, 132, 199, 0.15);
   --color-glow-sm: rgba(2, 132, 199, 0.08);
+  --color-input-bg: rgba(0, 0, 0, 0.02);
+  --color-input-border: rgba(2, 132, 199, 0.15);
 }
 
 ::-webkit-scrollbar {
