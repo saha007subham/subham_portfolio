@@ -2,6 +2,7 @@ import { useEffect, useRef, Component } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Download, Mail, ExternalLink } from "lucide-react";
 import HeroScene from "../components/HeroScene";
+import resumePdf from "../assets/Subham_Saha_Resume.pdf";
 
 class ErrorBoundaryHero extends Component {
   constructor(props) {
@@ -190,7 +191,8 @@ export default function Hero() {
             </motion.button>
 
             <motion.a
-              href="/resume.pdf"
+              href={resumePdf}
+              download="Subham_Saha_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
