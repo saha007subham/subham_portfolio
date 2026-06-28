@@ -176,10 +176,7 @@ export default function Navbar({ isDark, toggleTheme }) {
         </div>
 
         <div className="flex items-center gap-3">
-          <Tooltip
-            text="Dark theme recommended for the best experience."
-            isDark={isDark}
-          >
+          <Tooltip text="Your choice is saved on this device." isDark={isDark}>
             <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.1 }}
