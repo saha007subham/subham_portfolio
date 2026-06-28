@@ -20,7 +20,7 @@ const experiences = [
     ],
     tech: [
       "ReactJS",
-      "TypeScript",
+      "JavaScript",
       "Redux Toolkit",
       "GraphQL",
       "Tailwind",
@@ -41,7 +41,7 @@ const experiences = [
       "Improved UI consistency and reduced redundant code across projects",
       "Collaborated on mobile-first responsive design systems",
     ],
-    tech: ["ReactJS", "JavaScript", "CSS3", "REST APIs", "Component Libraries"],
+    tech: ["ReactJS", "TypeScript", "CSS3", "REST APIs", "Component Libraries"],
     logo: "AC",
   },
 ];
