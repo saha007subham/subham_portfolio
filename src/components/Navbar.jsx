@@ -54,12 +54,39 @@ export default function Navbar({ isDark, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const [activeSection, setActiveSection] = useState("");
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-
     window.addEventListener("scroll", onScroll);
-
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = ["about", "experience", "projects", "skills", "contact"];
+    
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // Triggers when section is in the middle of the viewport
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollTo = (href) => {
@@ -80,9 +107,17 @@ export default function Navbar({ isDark, toggleTheme }) {
         transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
         className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 md:px-10 h-16"
         style={{
-          background: scrolled ? "rgba(2,4,8,0.85)" : "transparent",
+          background: scrolled
+            ? isDark
+              ? "rgba(2,4,8,0.85)"
+              : "rgba(255,255,255,0.85)"
+            : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+          borderBottom: scrolled
+            ? isDark
+              ? "1px solid rgba(255,255,255,0.06)"
+              : "1px solid rgba(2, 132, 199, 0.1)"
+            : "none",
           transition:
             "background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease",
         }}
@@ -111,30 +146,30 @@ export default function Navbar({ isDark, toggleTheme }) {
         </button>
 
         <div className="hidden md:flex items-center gap-8">
-          {links.map((link, i) => (
-            <motion.button
-              key={link.label}
-              onClick={() => scrollTo(link.href)}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.07 }}
-              className="text-sm font-medium transition-colors duration-200 section-label"
-              style={{
-                color: "var(--color-muted)",
-                letterSpacing: "0.05em",
-                fontSize: "0.8rem",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-primary)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--color-muted)")
-              }
-              data-cursor-hover
-            >
-              {link.label}
-            </motion.button>
-          ))}
+          {links.map((link, i) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <motion.button
+                key={link.label}
+                onClick={() => scrollTo(link.href)}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.07 }}
+                className={`text-sm font-medium transition-colors duration-200 section-label ${
+                  isActive
+                    ? "text-[var(--color-primary)]"
+                    : "text-[var(--color-muted)] hover:text-[var(--color-primary)]"
+                }`}
+                style={{
+                  letterSpacing: "0.05em",
+                  fontSize: "0.8rem",
+                }}
+                data-cursor-hover
+              >
+                {link.label}
+              </motion.button>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-3">
@@ -199,26 +234,32 @@ export default function Navbar({ isDark, toggleTheme }) {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[99] flex flex-col pt-20 px-6"
             style={{
-              background: "rgba(2,4,8,0.97)",
+              background: isDark ? "rgba(2,4,8,0.97)" : "rgba(255,255,255,0.97)",
               backdropFilter: "blur(20px)",
             }}
           >
-            {links.map((link, i) => (
-              <motion.button
-                key={link.label}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.07 }}
-                onClick={() => scrollTo(link.href)}
-                className="py-5 text-left text-2xl font-space font-semibold border-b"
-                style={{
-                  borderColor: "var(--color-border)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {link.label}
-              </motion.button>
-            ))}
+            {links.map((link, i) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <motion.button
+                  key={link.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  onClick={() => scrollTo(link.href)}
+                  className={`py-5 text-left text-2xl font-space font-semibold border-b transition-colors duration-200 ${
+                    isActive
+                      ? "text-[var(--color-primary)]"
+                      : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                  }`}
+                  style={{
+                    borderColor: "var(--color-border)",
+                  }}
+                >
+                  {link.label}
+                </motion.button>
+              );
+            })}
 
             <motion.a
               href="#contact"
