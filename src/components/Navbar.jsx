@@ -16,11 +16,11 @@ function Tooltip({ text, children, isDark }) {
       <AnimatePresence>
         {showTooltip && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 rounded-lg whitespace-nowrap text-xs font-medium pointer-events-none z-50"
+            className="hidden md:block absolute top-full right-[-70px] -translate-x-1/2 mt-3 px-3 py-2 rounded-lg whitespace-nowrap text-xs font-medium pointer-events-none z-50"
             style={{
               background: isDark
                 ? "rgba(15,23,42,0.95)"
@@ -64,7 +64,7 @@ export default function Navbar({ isDark, toggleTheme }) {
 
   useEffect(() => {
     const sectionIds = ["about", "experience", "projects", "skills", "contact"];
-    
+
     const handleIntersection = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -79,7 +79,10 @@ export default function Navbar({ isDark, toggleTheme }) {
       threshold: 0,
     };
 
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      observerOptions,
+    );
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
@@ -234,7 +237,9 @@ export default function Navbar({ isDark, toggleTheme }) {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[99] flex flex-col pt-20 px-6"
             style={{
-              background: isDark ? "rgba(2,4,8,0.97)" : "rgba(255,255,255,0.97)",
+              background: isDark
+                ? "rgba(2,4,8,0.97)"
+                : "rgba(255,255,255,0.97)",
               backdropFilter: "blur(20px)",
             }}
           >
