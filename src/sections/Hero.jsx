@@ -87,7 +87,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-24 md:pt-0 md:pb-0"
     >
       {/* Radial glow bg */}
       <div
@@ -231,7 +231,7 @@ export default function Hero() {
           {/* Stats */}
           <motion.div
             variants={item}
-            className="flex flex-wrap items-center justify-center gap-10 mt-16"
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-8 md:mt-16"
           >
             {[
               { value: "3+", label: "Years Experience" },

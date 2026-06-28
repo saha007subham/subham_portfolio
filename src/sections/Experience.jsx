@@ -63,7 +63,7 @@ function TimelineCard({ exp, index, isLast }) {
       className="relative flex gap-8"
     >
       {/* Timeline */}
-      <div className="flex flex-col items-center">
+      <div className="hidden md:flex flex-col items-center">
         <motion.div
           initial={{ scale: 0 }}
           animate={inView ? { scale: 1 } : {}}
@@ -132,7 +132,7 @@ function TimelineCard({ exp, index, isLast }) {
             </div>
           </div>
 
-          <div className="flex flex-col items-end gap-1">
+          <div className="flex flex-col items-start md:items-end gap-1">
             <div
               className="flex items-center gap-1.5 text-xs font-mono-custom"
               style={{ color: "var(--color-muted)" }}
