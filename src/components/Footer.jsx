@@ -38,7 +38,7 @@ export default function Footer() {
           className="text-xs font-mono-custom"
           style={{ color: "var(--color-muted)" }}
         >
-          © 2024 Subham Saha. All rights reserved.
+          © 2026 Subham Saha. All rights reserved.
         </p>
       </div>
     </footer>

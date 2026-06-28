@@ -207,8 +207,10 @@ export default function Hero() {
               Resume
             </motion.a>
 
-            <motion.button
-              onClick={() => scrollTo("#contact")}
+            <motion.a
+              href="mailto:dev.subham07@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm glass-card magnetic-btn"
@@ -220,8 +222,8 @@ export default function Hero() {
               data-cursor-hover
             >
               <Mail size={16} />
-              Contact Me
-            </motion.button>
+              Email
+            </motion.a>
           </motion.div>
 
           {/* Stats */}
