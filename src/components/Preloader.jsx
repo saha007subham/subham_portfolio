@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const loadingMessages = [
-  "Initializing components...",
-  "Styling layout structures...",
-  "Assembling portfolio nodes...",
-  "Fine-tuning animations...",
-  "Ready to explore!"
-];
+import { motion } from "framer-motion";
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [messageIndex, setMessageIndex] = useState(0);
 
   useEffect(() => {
     // Smooth progress increment
@@ -33,15 +24,6 @@ export default function Preloader({ onComplete }) {
 
     return () => clearInterval(interval);
   }, [onComplete]);
-
-  useEffect(() => {
-    // Cycle messages based on progress
-    if (progress < 25) setMessageIndex(0);
-    else if (progress < 50) setMessageIndex(1);
-    else if (progress < 75) setMessageIndex(2);
-    else if (progress < 95) setMessageIndex(3);
-    else setMessageIndex(4);
-  }, [progress]);
 
   return (
     <motion.div
@@ -69,14 +51,6 @@ export default function Preloader({ onComplete }) {
           </div>
         </div>
 
-        {/* Counter */}
-        <motion.div 
-          className="text-5xl font-mono-custom font-extrabold tracking-wider bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] -webkit-background-clip-text -webkit-text-fill-color-transparent bg-clip-text mb-4"
-          style={{ textShadow: "0 0 30px var(--color-glow)" }}
-        >
-          {progress}%
-        </motion.div>
-
         {/* Progress Bar Track */}
         <div className="w-full h-[6px] bg-white bg-opacity-5 rounded-full overflow-hidden mb-6 relative">
           <motion.div
@@ -87,19 +61,15 @@ export default function Preloader({ onComplete }) {
           />
         </div>
 
-        {/* Dynamic Status Text */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={messageIndex}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            transition={{ duration: 0.2 }}
-            className="text-sm font-space font-medium text-[var(--color-muted)] min-h-[20px]"
-          >
-            {loadingMessages[messageIndex]}
-          </motion.p>
-        </AnimatePresence>
+        {/* Static Status Text */}
+        <motion.p
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-sm font-space font-medium text-[var(--color-muted)] min-h-[20px]"
+        >
+          Just a moment—great things take time.
+        </motion.p>
       </div>
     </motion.div>
   );
