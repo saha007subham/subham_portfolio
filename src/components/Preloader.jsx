@@ -51,7 +51,7 @@ export default function Preloader({ onComplete }) {
         y: -30,
         transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } 
       }}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[var(--color-bg)] transition-colors duration-500"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#020408] transition-colors duration-500"
     >
       <div className="w-full max-w-md px-8 text-center flex flex-col items-center">
         {/* Glowing Geometric Loader */}
