@@ -85,9 +85,7 @@ I'm Subham Saha, a Frontend Engineer with 3+ years of experience building scalab
 
 ## 📫 Contact
 
-* LinkedIn: Add your LinkedIn profile
-* GitHub: Add your GitHub profile
-* Email: Add your email address
+* LinkedIn: www.linkedin.com/in/saha007subham
 
 ---
 
