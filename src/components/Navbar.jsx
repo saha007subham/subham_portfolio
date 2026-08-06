@@ -144,7 +144,7 @@ export default function Navbar({ isDark, toggleTheme }) {
             className="font-space font-bold text-sm tracking-wider"
             style={{ color: "var(--color-text)" }}
           >
-            Subham S<span className="gradient-text">.</span>
+            Grow with Subham<span className="gradient-text">.</span>
           </span>
         </button>
 
