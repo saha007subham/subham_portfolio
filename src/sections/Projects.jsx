@@ -1,7 +1,17 @@
 import { useRef, useState } from "react";
 import snapUiImage from "../assets/snap-ui.png";
+import amberImage from "../assets/amber-ui.png";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink, Layers, Zap, Moon, Smartphone } from "lucide-react";
+import {
+  ExternalLink,
+  Layers,
+  Zap,
+  Moon,
+  Smartphone,
+  ShoppingBag,
+  Sparkles,
+  Palette,
+} from "lucide-react";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -42,6 +52,26 @@ const projects = [
     image: snapUiImage,
     badge: "Featured",
   },
+  {
+    name: "Amber Attiire",
+    tagline: "Luxury Saree E-Commerce Platform",
+    description:
+      "A modern and elegant e-commerce website for premium sarees, designed with a luxury shopping experience in mind. Features responsive layouts, smooth animations, and a clean UI focused on showcasing traditional fashion with a premium feel.",
+    tech: ["React.js", "Tailwind CSS", "Vite", "React Router"],
+    features: [
+      { icon: ShoppingBag, label: "Product Collection" },
+      { icon: Sparkles, label: "Luxury UI Design" },
+      { icon: Smartphone, label: "Responsive Layout" },
+      { icon: Palette, label: "Modern Animations" },
+    ],
+    gradient: "linear-gradient(135deg, #0ea5e9, #38bdf8, #22d3ee)",
+    glow: "rgba(56,189,248,0.25)",
+    borderColor: "rgba(56,189,248,0.2)",
+    github: "https://github.com/saha007subham/amber-attire-boutique",
+    demo: "https://amber-attire-boutique.vercel.app/",
+    image: amberImage,
+    badge: "Featured",
+  },
 ];
 
 function ProjectCard({ project, index }) {
@@ -60,6 +90,7 @@ function ProjectCard({ project, index }) {
   return (
     <motion.div
       ref={ref}
+      className="h-full"
       initial={{ opacity: 0, y: 60 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
@@ -81,7 +112,7 @@ function ProjectCard({ project, index }) {
           scale: hovering ? 1.01 : 1,
         }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className="rounded-3xl overflow-hidden glass-card"
+        className="rounded-3xl overflow-hidden glass-card h-full flex flex-col"
         style={{
           border: `1px solid ${project.borderColor}`,
           boxShadow: hovering
@@ -153,7 +184,7 @@ function ProjectCard({ project, index }) {
         </div>
 
         {/* Content */}
-        <div className="p-8">
+        <div className="p-8 flex flex-col flex-1">
           <div className="mb-4">
             <h3
               className="font-space font-bold text-2xl mb-1"
@@ -290,7 +321,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
           {projects.map((project, i) => (
             <ProjectCard key={project.name} project={project} index={i} />
           ))}
