@@ -27,14 +27,21 @@ const typewriterWords = [
 ];
 
 export default function Hero() {
+  const heroRef = useRef(null);
   const wordRef = useRef(null);
   const wordIndex = useRef(0);
   const charIndex = useRef(0);
   const deleting = useRef(false);
   const timerRef = useRef();
+  const isVisible = useRef(false);
 
   useEffect(() => {
     const type = () => {
+      if (!isVisible.current) {
+        timerRef.current = null;
+        return;
+      }
+
       const word = typewriterWords[wordIndex.current];
       if (!wordRef.current) return;
 
@@ -58,8 +65,29 @@ export default function Hero() {
       timerRef.current = setTimeout(type, deleting.current ? 60 : 90);
     };
 
-    timerRef.current = setTimeout(type, 800);
-    return () => clearTimeout(timerRef.current);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          isVisible.current = true;
+          if (!timerRef.current) {
+            timerRef.current = setTimeout(type, 800);
+          }
+        } else {
+          isVisible.current = false;
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+          }
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   const scrollTo = (href) => {
@@ -87,6 +115,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-24 md:pt-0 md:pb-0"
     >
       {/* Radial glow bg */}
@@ -150,9 +179,9 @@ export default function Hero() {
             Frontend Engineer crafting{" "}
             <span className="gradient-text">
               <span ref={wordRef} />
-              <span className="animate-pulse" style={{ color: "#38bdf8" }}>
+              {/* <span className="animate-pulse" style={{ color: "#38bdf8" }}>
                 |
-              </span>
+              </span> */}
             </span>
           </motion.div>
 
@@ -235,7 +264,7 @@ export default function Hero() {
           >
             {[
               { value: "3+", label: "Years Experience" },
-              { value: "2K+", label: "Followers" },
+              { value: "3K+", label: "Followers" },
               { value: "200+", label: "DSA Problems Solved" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
