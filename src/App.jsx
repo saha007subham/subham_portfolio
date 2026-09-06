@@ -12,6 +12,7 @@ import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
 import Certification from "./sections/Certification";
 import Preloader from "./components/Preloader";
+import FloatingContact from "./components/FloatingContact";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +59,8 @@ function App() {
 
         {/* Footer segment */}
         <Footer />
+
+        <FloatingContact />
       </div>
     </>
   );
