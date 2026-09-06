@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import snapUiImage from "../assets/snap-ui.png";
 import amberImage from "../assets/amber-ui.png";
+import mapLabImage from "../assets/mapLabImage.png";
 import { motion, useInView } from "framer-motion";
 import {
   ExternalLink,
@@ -11,6 +12,10 @@ import {
   ShoppingBag,
   Sparkles,
   Palette,
+  Map,
+  MapPin,
+  FileJson,
+  Ruler,
 } from "lucide-react";
 
 const Github = ({ size = 24, ...props }) => (
@@ -53,24 +58,31 @@ const projects = [
     badge: "Featured",
   },
   {
-    name: "Amber Attiire",
-    tagline: "Luxury Saree E-Commerce Platform",
+    name: "MapLab",
+    tagline: "Interactive GIS Mapping Sandbox",
     description:
-      "A modern and elegant e-commerce website for premium sarees, designed with a luxury shopping experience in mind. Features responsive layouts, smooth animations, and a clean UI focused on showcasing traditional fashion with a premium feel.",
-    tech: ["React.js", "Tailwind CSS", "Vite", "React Router"],
+      "An interactive GIS sandbox built with React, Mapbox GL JS, and Turf.js for creating and analyzing geospatial data. Users can place markers, draw polygons, import and export GeoJSON, and calculate polygon areas directly on an interactive map.",
+    tech: [
+      "React.js",
+      "Mapbox GL JS",
+      "Turf.js",
+      "GeoJSON",
+      "Tailwind CSS",
+      "Vite",
+    ],
     features: [
-      { icon: ShoppingBag, label: "Product Collection" },
-      { icon: Sparkles, label: "Luxury UI Design" },
-      { icon: Smartphone, label: "Responsive Layout" },
-      { icon: Palette, label: "Modern Animations" },
+      { icon: Map, label: "Interactive Map" },
+      { icon: MapPin, label: "Markers & Polygons" },
+      { icon: FileJson, label: "GeoJSON Import/Export" },
+      { icon: Ruler, label: "Area Calculation" },
     ],
     gradient: "linear-gradient(135deg, #0ea5e9, #38bdf8, #22d3ee)",
     glow: "rgba(56,189,248,0.25)",
     borderColor: "rgba(56,189,248,0.2)",
-    github: "https://github.com/saha007subham/amber-attire-boutique",
-    demo: "https://amber-attire-boutique.vercel.app/",
-    image: amberImage,
-    badge: "Featured",
+    github: "https://github.com/saha007subham/varaha-map-app",
+    demo: "https://varaha-map-app.vercel.app/",
+    image: mapLabImage,
+    badge: "",
   },
 ];
 
@@ -142,18 +154,20 @@ function ProjectCard({ project, index }) {
           />
 
           {/* Badge */}
-          <div className="absolute top-4 left-4">
-            <span
-              className="px-3 py-1.5 rounded-full text-xs font-mono-custom tracking-wider"
-              style={{
-                background: project.gradient,
-                color: "#020408",
-                fontWeight: 600,
-              }}
-            >
-              {project.badge}
-            </span>
-          </div>
+          {project.badge && (
+            <div className="absolute top-4 left-4">
+              <span
+                className="px-3 py-1.5 rounded-full text-xs font-mono-custom tracking-wider"
+                style={{
+                  background: project.gradient,
+                  color: "#020408",
+                  fontWeight: 600,
+                }}
+              >
+                {project.badge}
+              </span>
+            </div>
+          )}
 
           {/* Buttons overlay */}
           <motion.div
