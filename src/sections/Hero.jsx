@@ -20,10 +20,10 @@ class ErrorBoundaryHero extends Component {
   }
 }
 const typewriterWords = [
-  "React Applications",
-  "TypeScript Systems",
-  "AI-Powered Experiences",
-  "Scalable Frontends",
+  "Full Stack Products",
+  "End-to-End Systems",
+  "API-Driven Experiences",
+  "Scalable Web Platforms",
 ];
 
 export default function Hero() {
@@ -176,7 +176,7 @@ export default function Hero() {
               color: "var(--color-muted)",
             }}
           >
-            Frontend Engineer crafting{" "}
+            Full Stack Developer building{" "}
             <span className="gradient-text">
               <span ref={wordRef} />
               {/* <span className="animate-pulse" style={{ color: "#38bdf8" }}>
@@ -190,9 +190,9 @@ export default function Hero() {
             className="max-w-2xl mx-auto text-base md:text-lg leading-relaxed mb-12"
             style={{ color: "var(--color-muted)", lineHeight: "1.7" }}
           >
-            3+ years building scalable React applications used by thousands of
-            users worldwide. Specializing in JavaScript, performance
-            optimization, and AI-powered web experiences.
+            3+ years building scalable web products from the interface to the
+            backend — combining React, Node.js, APIs, and database-driven
+            systems to deliver fast, reliable digital experiences.
           </motion.p>
 
           <motion.div
@@ -265,7 +265,7 @@ export default function Hero() {
             {[
               { value: "3+", label: "Years Experience" },
               { value: "3K+", label: "Followers" },
-              { value: "200+", label: "DSA Problems Solved" },
+              { value: "300+", label: "Data Structure & Algorithms" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-space font-bold text-3xl gradient-text">

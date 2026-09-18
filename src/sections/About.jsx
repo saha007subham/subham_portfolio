@@ -10,6 +10,8 @@ const skills = [
   "Tailwind CSS",
   "GraphQL",
   "NodeJS",
+  "ExpressJS",
+  "MongoDB",
   "REST APIs",
   "Performance Optimization",
   "System Design",
@@ -18,12 +20,19 @@ const skills = [
 ];
 
 const highlights = [
-  "Built and shipped a gamification platform used by thousands of users globally",
-  "Independently designed core features and owned product from concept to production",
-  "Optimized rendering performance across devices for seamless user experience",
-  "Integrated GraphQL APIs and complex data pipelines",
-  "Collaborated with cross-functional teams at Flyy on production-ready applications",
-  "Focus on writing efficient, reusable, and maintainable code",
+  "Built and shipped full stack products used by thousands of users globally",
+  "Designed and delivered end-to-end features across UI, APIs, and data flows",
+  "Optimized frontend performance while maintaining secure, scalable backend logic",
+  "Integrated GraphQL/REST APIs, authentication, and real-time product workflows",
+  "Collaborated with cross-functional teams at Flyy on production-ready systems",
+  "Focused on writing clean, maintainable code that balances speed, quality, and business impact",
+];
+
+const achievements = [
+  "Star of the Month — AppyCodes, January 2023, recognized for outstanding performance and contribution.",
+  "Secured a global rank of 2,521 among 38,291 participants in LeetCode Biweekly Contest 190.",
+  "Solved 350+ coding problems across LeetCode and GeeksforGeeks.",
+  "Achieved a 1,601 LeetCode contest rating and earned the 200 Days Badge (2026).",
 ];
 
 export default function About() {
@@ -69,8 +78,8 @@ export default function About() {
                 color: "var(--color-text)",
               }}
             >
-              Frontend Engineer building{" "}
-              <span className="gradient-text">scalable systems</span>
+              Full Stack Developer building{" "}
+              <span className="gradient-text">scalable digital products</span>
             </motion.h2>
           </div>
 
@@ -126,13 +135,12 @@ export default function About() {
                     className="font-semibold"
                     style={{ color: "var(--color-text)" }}
                   >
-                    Frontend Engineer with 3+ years
+                    Full Stack Developer with 3+ years
                   </span>{" "}
-                  of experience building scalable, high-performance web
-                  applications using React.js, JavaScript, and modern UI
-                  technologies. I specialize in creating responsive,
-                  user-centric interfaces with a strong focus on performance
-                  optimization, clean architecture, and maintainable code.
+                  of experience building scalable web applications across the
+                  entire product lifecycle. I work across frontend interfaces,
+                  backend APIs, data flows, and system architecture to create
+                  fast, reliable, and user-focused digital experiences.
                 </p>
 
                 <p
@@ -143,9 +151,9 @@ export default function About() {
                   <span className="font-semibold" style={{ color: "#38bdf8" }}>
                     gamification platform used by thousands of users globally
                   </span>
-                  , where I was responsible for designing and developing core
-                  features, optimizing rendering performance, and ensuring a
-                  seamless user experience across devices.
+                  , where I designed core features, integrated APIs, improved
+                  application performance, and helped deliver a seamless product
+                  experience from concept to production.
                 </p>
 
                 <p
@@ -159,9 +167,10 @@ export default function About() {
                   >
                     Flyy
                   </span>
-                  , I contribute to building production-ready applications,
-                  collaborating with cross-functional teams, and continuously
-                  improving system performance, scalability, and usability.
+                  , I contribute to building production-ready systems by
+                  connecting clean frontend experiences with robust backend
+                  logic, scalable integrations, and data-driven product
+                  decisions.
                 </p>
               </motion.div>
 
@@ -211,6 +220,34 @@ export default function About() {
                   </div>
                 ))}
               </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Achievements Section */}
+          <motion.div variants={item} className="pt-2">
+            <h3
+              className="font-space font-bold text-lg mb-5"
+              style={{ color: "var(--color-text)" }}
+            >
+              Achievements
+            </h3>
+            <div className="space-y-3">
+              {achievements.map((achievement, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div
+                    className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                    style={{
+                      background: "linear-gradient(135deg, #38bdf8, #22d3ee)",
+                    }}
+                  />
+                  <span
+                    className="text-sm leading-relaxed"
+                    style={{ color: "var(--color-muted)", lineHeight: "1.8" }}
+                  >
+                    {achievement}
+                  </span>
+                </div>
+              ))}
             </div>
           </motion.div>
 

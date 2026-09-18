@@ -3,15 +3,21 @@ import { motion, useInView, useAnimation } from "framer-motion";
 
 const skills = [
   { name: "ReactJS", level: 95, color: "#61dafb" },
+  { name: "React Native", level: 80, color: "#61dafb" },
   { name: "JavaScript", level: 92, color: "#f7df1e" },
   { name: "TypeScript", level: 80, color: "#3178c6" },
+  { name: "TanStack", level: 78, color: "#ff4154" },
   { name: "Redux Toolkit", level: 88, color: "#764abc" },
   { name: "Tailwind CSS", level: 93, color: "#38bdf8" },
   { name: "GraphQL", level: 80, color: "#e535ab" },
   { name: "NodeJS", level: 75, color: "#339933" },
+  { name: "ExpressJS", level: 78, color: "#68a063" },
+  { name: "MongoDB", level: 72, color: "#4db33d" },
+  { name: "PostgreSQL", level: 74, color: "#336791" },
+  { name: "Redis", level: 70, color: "#dc382d" },
   { name: "REST APIs", level: 90, color: "#22d3ee" },
   { name: "System Design", level: 82, color: "#f59e0b" },
-  { name: "DSA", level: 78, color: "#10b981" },
+  { name: "Data Structures & Algorithms", level: 78, color: "#10b981" },
   { name: "AI/LLM Integration", level: 75, color: "#a78bfa" },
   { name: "Performance Opt.", level: 85, color: "#fb7185" },
 ];
